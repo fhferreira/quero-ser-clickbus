@@ -12,11 +12,16 @@ class CaixaEletronico{
 	public function saque($valor){		
 		$restante = 0;
 		$quebra = explode(".",$valor);
+		if(count($quebra) > 0){
+		   $quebra = $quebra[1];
+		}else{
+		   $quebra = 0;
+		}
 		if( is_null($valor) ){
 			throw new InvalidArgumentException("throw InvalidArgumentException");			
 		}else if( $valor < 0 || empty($valor) ){
 			throw new Exception("[Empty Set]");
-		}else if(is_float($valor) && ( $quebra[1] > 0 ) ){
+		}else if(is_float($valor) && ( $quebra > 0 ) ){
 			throw new InvalidArgumentException("throw InvalidArgumentException");
 		}else if( is_numeric($valor) ){
 			$total_notas = count($this->notas_validas);
